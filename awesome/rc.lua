@@ -48,7 +48,7 @@ end
 beautiful.init("~/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "alacritty --config-file /home/uwu/alacritty.yml "
+terminal = "alacritty --config-file /home/gram/alacritty.yml "
 editor = os.getenv("EDITOR") or "emacs"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -61,8 +61,8 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.spiral,
+    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
@@ -109,6 +109,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock("%a %b %d %T ",1)
 
+battery = awful.widget.watch('bash -c "~/.config/awesome/batmoji.bash"',2)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -213,6 +214,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             --mykeyboardlayout,
             wibox.widget.systray(),
+            battery,
             mytextclock,
             s.mylayoutbox,
         },
@@ -332,7 +334,7 @@ globalkeys = gears.table.join(
                 { description = "shutdown system", group = "client" }),
 
         -- System Restart
-        awful.key({ modkey }, "p", function () awful.spawn.with_shell("reboot") end,
+        awful.key({ modkey }, "p", function () awful.spawn.with_shell("systemctl reboot") end,
             { description = "reboot system", group = "client" }),
 
         -- Pcmanfm
@@ -358,7 +360,7 @@ globalkeys = gears.table.join(
         awful.key({ modkey, "Shift" }, "c" , function () awful.spawn("code") end,
             {description = "open VS Code", group = "Application"}),
         -- Brave Browser
-        awful.key({ modkey, "Shift" }, "f" , function () awful.spawn("brave") end,
+        awful.key({ modkey, "Shift" }, "f" , function () awful.spawn("brave-browser") end,
             {description = "open brave bowser", group = "Application"}),
 
 
