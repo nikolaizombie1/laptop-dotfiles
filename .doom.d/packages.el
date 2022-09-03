@@ -51,6 +51,7 @@
 (package! zone)
 (package! zone-nyan)
 (package! zone-rainbow)
+(package! lsp-mode)
 (package! lsp-java)
 (package! lsp-ui)
 (package! company)
