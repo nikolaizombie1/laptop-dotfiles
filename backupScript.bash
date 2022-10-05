@@ -9,8 +9,4 @@ cp ~/.zshrc .
 cp ~/alacritty.yml .
 cp ~/.config/starship.toml .
 cp ~/.xinitrc .
-
-if git pull; then
-    git commit -a -m "$1"
-    git push
-fi
+cp -r ~/.config/fish .

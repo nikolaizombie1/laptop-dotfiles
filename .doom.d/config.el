@@ -3,11 +3,10 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+(setq user-full-name "Fabio Matos"
+      user-mail-address "fabio.matos999@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -18,7 +17,8 @@
 ;;   presentations or streaming.
 ;;
 (setq doom-font (font-spec :family "mononoki Nerd Font" :size 16)
-      doom-variable-pitch-font (font-spec :family "mononoki Nerd Font" :size 16))
+      doom-variable-pitch-font (font-spec :family "mononoki Nerd Font" :size 16)
+      doom-big-font (font-spec :family "mononoki Nerd Font" :size 32))
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
@@ -26,8 +26,23 @@
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
-;ght; `load-theme' function. This is the default:
-(setq doom-theme 'doom-tokyo-night)
+;; `load-theme' function. This is the default:
+
+(defun random-doom-theme ()
+  "Returns a random doom-theme from a hardcoded list"
+  (seq-random-elt
+        '(doom-Iosvkem
+          doom-horizon
+          doom-molokai
+          doom-old-hope
+          doom-laserwave
+          doom-tomorrow-night
+          doom-challenger-deep
+          doom-monokai-classic
+          doom-outrun-electric
+          doom-shades-of-purple)))
+
+(setq doom-theme (random-doom-theme))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -57,17 +72,6 @@
 
 (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
 (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
-(require 'emms-setup)
-(emms-all)
-(emms-default-players)
-(setq emms-source-file-default-directory "~/Music/")
 (setq confirm-kill-emacs nil)
-(after! org
-  (setq org-directory "~/Documents/Emacs/org")
-  (setq org-log-done 'time)
-  (require 'org-bullets)
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-;; Enabling only some features
-(setq dap-auto-configure-features '(sessions locals controls tooltip))
-(require 'dap-python)
-(require 'dap-gdb-lldb)
+(setq dap-auto-configure-mode t)
+(require 'dap-cpptools)

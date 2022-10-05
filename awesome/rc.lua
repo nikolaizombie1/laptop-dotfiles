@@ -110,6 +110,8 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 mytextclock = wibox.widget.textclock("%a %b %d %T ",1)
 
 battery = awful.widget.watch('bash -c "~/.config/awesome/batmoji.bash"',2)
+cpu_clock =  awful.widget.watch('bash -c "~/.config/awesome/cpu_freq.bash"',2)
+currsink = awful.widget.watch("bash -c '~/./.config/awesome/current_sink'",0.1)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -214,6 +216,8 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             --mykeyboardlayout,
             wibox.widget.systray(),
+            currsink,
+            cpu_clock,
             battery,
             mytextclock,
             s.mylayoutbox,
@@ -356,6 +360,10 @@ globalkeys = gears.table.join(
         -- Launch pulsemixer
         awful.key({ modkey, "Shift" }, "p" , function () awful.spawn(terminal.." -e pulsemixer") end,
             {description = "open pulsemixer", group = "Application"}),
+        -- Switch Audio Output
+        awful.key({ modkey }, "0", function () awful.spawn.with_shell("~/./.config/awesome/change_sinks") end,
+            { description = "Change audio devices", group = "client" }),
+
         -- Launch Visual Studio Code
         awful.key({ modkey, "Shift" }, "c" , function () awful.spawn("code") end,
             {description = "open VS Code", group = "Application"}),
@@ -363,7 +371,22 @@ globalkeys = gears.table.join(
         awful.key({ modkey, "Shift" }, "f" , function () awful.spawn("brave-browser") end,
             {description = "open brave bowser", group = "Application"}),
 
+        -- Lower CPU Frequency
+        awful.key({ modkey, "Shift" }, "b", function () awful.spawn.with_shell("sudo cpupower frequency-set -g powersave -u 800M") end,
+            { description = "Drecrease CPU frequency", group = "client" }),
+        -- Increase CPU Frequency
+        awful.key({ modkey, "Shift" }, "v", function () awful.spawn.with_shell("sudo cpupower frequency-set -g performance -u 3.4G") end,
+            { description = "Maximize cpu frequency", group = "client" }),
 
+        -- Increase monitor backlight brightness by 10%
+        awful.key({ modkey }, "F3", function () awful.spawn.with_shell("sudo brightnessctl --device 'intel_backlight' s +10%") end,
+            { description = "Increase monitor brightness", group = "client" }),
+        -- Decrease monitor backlight brightness by 10%
+        awful.key({ modkey }, "F2", function () awful.spawn.with_shell("sudo brightnessctl --device 'intel_backlight' s 10-%") end,
+            { description = "Increase monitor brightness", group = "client" }),
+        -- Toggle keyboard LEDs
+        awful.key({ modkey }, "F8", function () awful.spawn.with_shell("~/./.config/awesome/toggle_kbd_led") end,
+            { description = "Toggle keyboard LEDs", group = "client" }),
         -- Prompt
         awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
             {description = "run prompt", group = "launcher"})
