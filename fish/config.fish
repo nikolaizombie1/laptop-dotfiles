@@ -15,11 +15,18 @@ alias doom="./.emacs.d/bin/doom"
 alias wd="wol 44:8A:5B:CE:75:8A"
 alias vim="nvim"
 
-export DEBUGINFOD_URLS='https://debuginfod.archlinux.org'
+set PATH $PATH ~/.cargo/bin/
+set PATH $PATH ~/.emacs.d/bin/
+set PATH $PATH ~/.local/bin/
 
+set -x DEBUGINFOD_URLS 'https://debuginfod.archlinux.org'
+set INFOPATH $INFOPATH /usr/local/share/info
+set INFOPATH $INFOPATH /usr/share/info/emacs
+set INFOPATH $INFOPATH /usr/share/info
+set -x INFOPATH $INFOPATH
 #Start X at login
-if status is-login
-    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
-        exec startx -- -keeptty
-    end
-end
+#if status is-login
+#    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+#        exec startx -- -keeptty
+#    end
+#end

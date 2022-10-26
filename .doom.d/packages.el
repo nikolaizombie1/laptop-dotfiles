@@ -54,3 +54,4 @@
 (package! fish-mode)
 (package! posframe)
 (package! dap-mode)
+(package! rust-mode)

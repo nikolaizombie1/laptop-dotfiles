@@ -9,4 +9,4 @@ cp .zshrc ~/
 cp alacritty.yml ~/
 cp starship.toml ~/.config
 cp .xinitrc ~/
-sudo mkdir "/etc/systemd/system/getty@tty1.service.d/" ; sudo mv override.conf /etc/systemd/system/getty@tty1.service.d/
+cp -r fish ~/.config/

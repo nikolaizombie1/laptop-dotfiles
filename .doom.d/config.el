@@ -73,5 +73,17 @@
 (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
 (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 (setq confirm-kill-emacs nil)
+(setq confirm-kill-processes nil)
 (setq dap-auto-configure-mode t)
 (require 'dap-cpptools)
+(require 'dap-gdb-lldb)
+(setq lsp-rust-server 'rust-analyzer)
+(dap-register-debug-template
+  "cpptools::Run Configuration"
+
+  (list :type "cppdbg"
+        :request "launch"
+        :name "cpptools::Run Configuration"
+        :MIMode "gdb"
+        :program "${workspaceFolder}/test"
+        :cwd "${workspaceFolder}"))

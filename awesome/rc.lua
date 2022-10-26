@@ -48,7 +48,7 @@ end
 beautiful.init("~/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "alacritty --config-file /home/gram/alacritty.yml "
+terminal = "/home/gram/.cargo/bin/alacritty --config-file /home/gram/alacritty.yml "
 editor = os.getenv("EDITOR") or "emacs"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -326,12 +326,17 @@ globalkeys = gears.table.join(
         awful.key({ modkey , "Shift" },            "Return",     function () awful.spawn.with_shell("~/.config/awesome/rofiRun.bash") end,
                 {description = "run rofi", group = "launcher"}),
 
-        -- Spectacle
-        awful.key({modkey, "Shift"}, "a", function() awful.spawn("spectacle -r -c -b") end, {description = "screenshot area", group="apps"}),
+        ---- Spectacle
+        --awful.key({modkey, "Shift"}, "a", function() awful.spawn("spectacle -r -c -b") end, {description = "screenshot area", group="apps"}),
 
-        awful.key({"Mod1"}, "Print", function() awful.spawn("spectacle -m -c -b") end, {description = "screenshot monitor", group="apps"}),
+        --awful.key({"Mod1"}, "Print", function() awful.spawn("spectacle -m -c -b") end, {description = "screenshot monitor", group="apps"}),
 
-        awful.key({}, "Print", function() awful.spawn("spectacle -f -c -b") end, {description = "screenshot all monitors", group="apps"}),
+        --awful.key({}, "Print", function() awful.spawn("spectacle -f -c -b") end, {description = "screenshot all monitors", group="apps"}),
+
+
+        -- Scrot
+        awful.key({ modkey, "Shift" }, "a", function () awful.spawn.with_shell("~/./.config/awesome/launch_scrot.sh") end,
+            { description = "Screnshot current window", group = "Application" }),
 
         -- System Shutdown
         awful.key({ modkey }, "x", function () awful.spawn.with_shell("systemctl poweroff") end,
@@ -358,7 +363,7 @@ globalkeys = gears.table.join(
             {description = "open speedcrunch", group = "Application"}),
 
         -- Launch pulsemixer
-        awful.key({ modkey, "Shift" }, "p" , function () awful.spawn(terminal.." -e pulsemixer") end,
+        awful.key({ modkey, "Shift" }, "p" , function () awful.spawn(terminal.." -e /home/gram/.local/bin/pulsemixer") end,
             {description = "open pulsemixer", group = "Application"}),
         -- Switch Audio Output
         awful.key({ modkey }, "0", function () awful.spawn.with_shell("~/./.config/awesome/change_sinks") end,
