@@ -11,3 +11,4 @@ cp ~/.config/starship.toml .
 cp ~/.xinitrc .
 cp -r ~/.config/fish .
 cp -r ~/Scripts .
+sudo cp /etc/systemd/system/rfkill-unblock.service .

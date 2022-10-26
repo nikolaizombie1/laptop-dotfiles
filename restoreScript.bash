@@ -11,6 +11,6 @@ cp starship.toml ~/.config
 cp .xinitrc ~/
 cp -r fish ~/.config/
 cp -r Scripts ~/
-sudo cp rfkill-unblock.service /etc/systemd/system/rfkill-unblock.service
+sudo cp rfkill-unblock.service /etc/systemd/system/
 sudo systemctl daemon-reload
-sudo systemctl enable rfkill-unblock.service
+sudo systemctl enable rfkill-unblock.service --now
