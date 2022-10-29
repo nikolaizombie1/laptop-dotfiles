@@ -1,8 +1,0 @@
-[Unit]
-Description=rfkill-unblock
-
-[Service]
-ExecStart=/bin/sh /home/gram/Scripts/rfkill_unblock.sh
-
-[Install]
-WantedBy=multi-user.target
